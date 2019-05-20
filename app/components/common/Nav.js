@@ -17,9 +17,9 @@ class Nav extends Component {
         <a href='/static/miner.go' download='miner.go'
            style={{paddingRight: '16px'}}>Download Miner</a>
         <a href='/static/readme.txt' target='_blank' style={{paddingRight: '16px'}}>Readme</a>
-        <Link to='/stats' className='btn btn--dash btn--nav'>Stats</Link>
-        <Link to='/rate' className='btn btn--dash btn--nav'>Rate</Link>
-        <Link to='/transfer' className='btn btn--dash btn--nav'>Transfer</Link>
+        <Link to='/home' className='btn btn--dash btn--nav'>Home</Link>
+        <Link to='/dashboard' className='btn btn--dash btn--nav'>Dashboard</Link>
+        <Link to='/botnet' className='btn btn--dash btn--nav'>My botnet</Link>
         {this.props.currentlySending ? (
           <LoadingButton className='btn--nav' />
         ) : (

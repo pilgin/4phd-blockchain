@@ -36,7 +36,7 @@ class Stats extends Component {
     return (
       <article>
         <section className='text-section'>
-          <h1>Stats</h1>
+          <h1>Dashboard</h1>
           <table>
             <thead>
               <tr>

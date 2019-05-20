@@ -62,7 +62,7 @@ class Main extends Component {
               {/* <Route path='/register' component={Register} /> */}
               <Route path='/login' component={Login} />
               <Route path='/home' component={Home} />
-              <Route path='/stats' component={Stats} />
+              <Route path='/dashboard' component={Stats} />
               {/* <Route path='/botnet' component={Botnet} /> */}
             </Route>
             <Route path='*' component={NotFound} />
