@@ -1,5 +1,3 @@
-'use strict'
-
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
@@ -40,7 +38,7 @@ function makeWebpackConfig (options) {
       })
     ]
   } else {
-    devtool = 'cheap-eval-source-map'
+    devtool = 'eval-source-map'
 
     entry = [
       'webpack-dev-server/client?http://localhost:3000',
@@ -57,8 +55,8 @@ function makeWebpackConfig (options) {
   }
 
   return {
-    devtool: devtool,
-    entry: entry,
+    devtool,
+    entry,
     output: { // Compile into `js/build.js`
       path: path.resolve(__dirname, '../', 'build'),
       filename: 'js/bundle.js'
