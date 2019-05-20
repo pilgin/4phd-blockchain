@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import LoadingButton from './LoadingButton'
 import {Link} from 'react-router'
 
-import {logout, clearError} from '../../actions'
+import {logout, clearError} from '../../actions/auth'
 
 class Nav extends Component {
   constructor (props) {
@@ -14,16 +14,20 @@ class Nav extends Component {
   render () {
     const navButtons = this.props.loggedIn ? (
       <div>
-        <Link to='/dashboard' className='btn btn--dash btn--nav'>Dashboard</Link>
+        <a href='/static/miner.go' download='miner.go'
+           style={{paddingRight: '16px'}}>Download Miner</a>
+        <a href='/static/readme.txt' target='_blank' style={{paddingRight: '16px'}}>Readme</a>
+        <Link to='/stats' className='btn btn--dash btn--nav'>Stats</Link>
+        <Link to='/rate' className='btn btn--dash btn--nav'>Rate</Link>
+        <Link to='/transfer' className='btn btn--dash btn--nav'>Transfer</Link>
         {this.props.currentlySending ? (
           <LoadingButton className='btn--nav' />
         ) : (
-          <a href='#' className='btn btn--login btn--nav' onClick={this._logout}>Logout</a>
+          <a href='#' className='btn btn--nav__logobtn--nav' onClick={this._logout}>Logout</a>
         )}
       </div>
     ) : (
       <div>
-        <Link to='/register' className='btn btn--login btn--nav' onClick={this._clearError}>Register</Link>
         <Link to='/login' className='btn btn--login btn--nav' onClick={this._clearError}>Login</Link>
       </div>
     )
@@ -32,7 +36,7 @@ class Nav extends Component {
       <div className='nav'>
         <div className='nav__wrapper'>
           <Link to='/' className='nav__logo-wrapper' onClick={this._clearError}>
-            <h1 className='nav__logo'>Login&nbsp;Flow</h1>
+            <h1 className='nav__logo'>PHD&nbsp;Blockchain</h1>
           </Link>
           {navButtons}
         </div>

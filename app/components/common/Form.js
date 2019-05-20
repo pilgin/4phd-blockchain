@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import ErrorMessage from './ErrorMessage'
 import LoadingButton from './LoadingButton'
 
-import {changeForm} from '../../actions'
+import {changeForm} from '../../actions/auth'
 
 class Form extends Component {
   constructor (props) {
@@ -22,15 +22,15 @@ class Form extends Component {
           <input
             className='form__field-input'
             type='text'
-            id='username'
-            value={this.props.data.username}
-            placeholder='frank.underwood'
+            id='login'
+            value={this.props.data.login}
+            placeholder='username'
             onChange={this._changeUsername}
             autoCorrect='off'
             autoCapitalize='off'
             spellCheck='false' />
-          <label className='form__field-label' htmlFor='username'>
-            Username
+          <label className='form__field-label' htmlFor='login'>
+            Login
           </label>
         </div>
         <div className='form__field-wrapper'>
@@ -59,7 +59,7 @@ class Form extends Component {
   }
 
   _changeUsername (event) {
-    this._emitChange({...this.props.data, username: event.target.value})
+    this._emitChange({...this.props.data, login: event.target.value})
   }
 
   _changePassword (event) {
@@ -72,7 +72,7 @@ class Form extends Component {
 
   _onSubmit (event) {
     event.preventDefault()
-    this.props.onSubmit(this.props.data.username, this.props.data.password)
+    this.props.onSubmit(this.props.data.login, this.props.data.password)
   }
 }
 
