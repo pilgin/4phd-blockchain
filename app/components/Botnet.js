@@ -28,8 +28,8 @@ class Botnet extends Component {
 
   render() {
     return (
-      <article>
-        <section className='text-section'>
+      <article className='page-container'>
+        <section className='column'>
           <h1>My botnet</h1>
           <table>
             <thead>

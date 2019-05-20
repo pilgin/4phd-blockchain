@@ -1,0 +1,4 @@
+.margin-vert {
+  margin-top: calc($wrapper-padding * 2);
+  margin-bottom: calc($wrapper-padding * 2);
+}

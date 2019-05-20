@@ -11,12 +11,14 @@ class Home extends Component {
 
   render() {
     return (
-      <article>
-        <section>
+      <article className='page-container'>
+        <section className='column'>
           <User />
         </section>
-        <section>
-          <Transfer />
+        <section className='column'>
+          <div className='margin-vert'>
+            <Transfer />
+          </div>
         </section>
       </article>
     )

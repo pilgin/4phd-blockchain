@@ -24,8 +24,8 @@ class Dashboards extends Component {
 
   render() {
     return (
-      <article>
-        <section className='text-section'>
+      <article className='page-container'>
+        <section className='column'>
           <h1>Dashboard</h1>
           <table>
             <thead>

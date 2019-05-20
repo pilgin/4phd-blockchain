@@ -14,6 +14,7 @@
 @import 'base/_typography.css';
 
 /* 4. Layout-related sections */
+@import 'layout/_layout.css';
 @import 'layout/_header.css';
 @import 'layout/_footer.css';
 
