@@ -1,8 +1,8 @@
 const request = {
   get (endpoint) {
     switch (endpoint) {
-      case '/user':
-        return fetch(`/api/user`, {
+      case '/botnet':
+        return fetch(`/api/botnet`, {
           credentials: 'same-origin'
         })
       default:

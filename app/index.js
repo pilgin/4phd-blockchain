@@ -17,10 +17,9 @@ import App from './components/App'
 import Home from './components/Home'
 import Login from './components/Login'
 // import Register from './components/Register'
-// import Dashboard from './components/Dashboard'
 import Stats from './components/Stats'
 // import Rate from './components/Rate'
-// import Transfer from './components/Transfer'
+import Botnet from './components/Botnet'
 import NotFound from './components/NotFound'
 
 const logger = createLogger({
@@ -63,7 +62,7 @@ class Main extends Component {
               <Route path='/login' component={Login} />
               <Route path='/home' component={Home} />
               <Route path='/dashboard' component={Stats} />
-              {/* <Route path='/botnet' component={Botnet} /> */}
+              <Route path='/botnet' component={Botnet} />
             </Route>
             <Route path='*' component={NotFound} />
           </Route>

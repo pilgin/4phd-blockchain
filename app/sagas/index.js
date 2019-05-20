@@ -5,6 +5,7 @@ import { fetchStatsFlow } from './stats'
 import { fetchRateFlow } from './rate'
 import { transferFlow } from './transfer'
 import { fetchUserFlow } from './user'
+import { fetchBotnetFlow } from './botnet'
 
 export default function* root() {
   yield fork(loginFlow)
@@ -13,4 +14,5 @@ export default function* root() {
   yield fork(fetchRateFlow)
   yield fork(transferFlow)
   yield fork(fetchUserFlow)
+  yield fork(fetchBotnetFlow)
 }
