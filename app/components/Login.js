@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import Form from './common/Form'
 
-import {loginRequest} from '../actions'
+import {loginRequest} from '../actions/auth'
 
 class Login extends Component {
   constructor (props) {
@@ -13,7 +13,7 @@ class Login extends Component {
 
   render () {
     const {dispatch} = this.props
-    const {formState, currentlySending, error} = this.props.data
+    const {formState, currentlySending, error} = this.props.data.auth
 
     return (
       <div className='form-page__wrapper'>
@@ -21,14 +21,15 @@ class Login extends Component {
           <div className='form-page__form-header'>
             <h2 className='form-page__form-heading'>Login</h2>
           </div>
-          <Form data={formState} dispatch={dispatch} history={this.props.history} onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
+          <Form data={formState} dispatch={dispatch} history={this.props.history}
+            onSubmit={this._login} btnText={'Login'} error={error} currentlySending={currentlySending} />
         </div>
       </div>
     )
   }
 
-  _login (username, password) {
-    this.props.dispatch(loginRequest({username, password}))
+  _login (login, password) {
+    this.props.dispatch(loginRequest({login, password}))
   }
 }
 
