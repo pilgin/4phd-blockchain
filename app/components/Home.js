@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import User from './User'
 import Transfer from './Transfer'
-import RateChart from './RateChart';
+import RateChart from './RateChart'
 
 class Home extends Component {
   constructor(props) {

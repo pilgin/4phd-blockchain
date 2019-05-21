@@ -6,7 +6,7 @@ import {
   FETCH_BOTNET,
   UPDATE_BOTNET,
   FETCH_BOTNET_ERROR
-} from "../actions/botnet/constants";
+} from "../actions/botnet/constants"
 
 export function* fetchBotnet(amount) {
   try {

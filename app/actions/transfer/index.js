@@ -5,8 +5,8 @@ import {
   TRANSFER_ERROR
 } from './constants'
 
-export function changeForm (newFormState) {
-  return {type: CHANGE_FORM, newFormState}
+export function changeForm(newFormState) {
+  return {type: CHANGE_FORM, newFormState }
 }
 
 export function transfer(amount) {

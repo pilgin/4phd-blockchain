@@ -7,7 +7,7 @@ import {
   UPDATE_STATS,
   UPDATE_TEAM_STATS,
   FETCH_STATS_ERROR
-} from "../actions/stats/constants";
+} from "../actions/stats/constants"
 
 export function* fetchStats() {
   try {

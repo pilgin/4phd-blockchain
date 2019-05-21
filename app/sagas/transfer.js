@@ -6,7 +6,7 @@ import {
   TRANSFER,
   TRANSFER_STATUS,
   TRANSFER_ERROR
-} from "../actions/transfer/constants";
+} from "../actions/transfer/constants"
 
 export function* transfer(amount) {
   try {

@@ -8,41 +8,35 @@ const tooltipLine = function(label, data) {
     курс: ${data.y}`
 }
 
+import { fetchRateHistory } from '../actions/rate'
+
 class RateChart extends Component {
   constructor(props) {
     super(props)
   }
 
+  componentWillMount() {
+    const to = moment().utc().unix()
+    const from = moment.unix(to).subtract(1, 'hour').unix()
+
+    this.from = from
+    this.to = to
+
+    this.props.dispatch(fetchRateHistory({ from, to }))
+  }
+
   render() {
+    const { rateHistory = [[this.from, 0]] } = this.props.data.rate
+
     const data = {
       label: '',
-      values: [
-        {x: new Date(2015, 2, 5), y: 1},
-        {x: new Date(2015, 2, 6), y: 2},
-        {x: new Date(2015, 2, 7), y: 0},
-        {x: new Date(2015, 2, 8), y: 3},
-        {x: new Date(2015, 2, 9), y: 2},
-        {x: new Date(2015, 2, 10), y: 3},
-        {x: new Date(2015, 2, 11), y: 4},
-        {x: new Date(2015, 2, 12), y: 4},
-        {x: new Date(2015, 2, 13), y: 1},
-        {x: new Date(2015, 2, 14), y: 5},
-        {x: new Date(2015, 2, 15), y: 0},
-        {x: new Date(2015, 2, 16), y: 1},
-        {x: new Date(2015, 2, 16), y: 1},
-        {x: new Date(2015, 2, 18), y: 4},
-        {x: new Date(2015, 2, 19), y: 4},
-        {x: new Date(2015, 2, 20), y: 5},
-        {x: new Date(2015, 2, 21), y: 5},
-        {x: new Date(2015, 2, 22), y: 5},
-        {x: new Date(2015, 2, 23), y: 1},
-        {x: new Date(2015, 2, 24), y: 0},
-        {x: new Date(2015, 2, 25), y: 1},
-        {x: new Date(2015, 2, 26), y: 1}
-      ]
+      values: rateHistory.map(([x, y]) => ({ x: moment.unix(x).toDate(), y }))
     }
 
-    const xScale = d3.time.scale().domain([new Date(2015, 2, 5), new Date(2015, 2, 26)]).range([0, 400 - 70])
+    const xScale = d3.time.scale().domain([
+      moment.unix(this.from).toDate(),
+      moment.unix(this.to).toDate()
+    ]).range([0, 350])
 
     return (
       <div className='chart-wrapper'>
@@ -52,19 +46,15 @@ class RateChart extends Component {
           height={280}
           margin={{top: 32, bottom: 32, left: 50, right: 0}}
           xScale={xScale}
-          xAxis={{tickValues: xScale.ticks(d3.time.day, 2), tickFormat: d3.time.format("%m/%d")}}
+          xAxis={{tickValues: xScale.ticks(d3.time.hour, 2), tickFormat: d3.time.format("%H:%M")}}
           tooltipHtml={tooltipLine}
           />
       </div>
     )
   }
-
-  _onChange(extent) {
-    this.setState({xScale: d3.time.scale().domain([extent[0], extent[1]]).range([0, 400 - 70])})
-  }
 }
 
-function select (state) {
+function select(state) {
   return {
     data: state
   }

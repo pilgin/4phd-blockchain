@@ -5,6 +5,11 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 function makeWebpackConfig (options) {
   let entry, plugins, devtool
 
+  const providePlugin = new webpack.ProvidePlugin({
+    ReactD3: "react-d3-components",
+    moment: 'moment'
+  })
+
   if (options.prod) {
     entry = [
       path.resolve(__dirname, '../app/index.js')
@@ -36,9 +41,7 @@ function makeWebpackConfig (options) {
           NODE_ENV: JSON.stringify('production')
         }
       }),
-      new webpack.ProvidePlugin({
-        ReactD3: "react-d3-components"
-      })
+      providePlugin
     ]
   } else {
     devtool = 'eval-source-map'
@@ -54,9 +57,7 @@ function makeWebpackConfig (options) {
       new HtmlWebpackPlugin({
         template: 'index.html'
       }),
-      new webpack.ProvidePlugin({
-        ReactD3: "react-d3-components"
-      })
+      providePlugin
     ]
   }
 

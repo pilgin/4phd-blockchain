@@ -6,7 +6,7 @@ import {
   FETCH_USER,
   UPDATE_USER,
   FETCH_USER_ERROR
-} from "../actions/user/constants";
+} from "../actions/user/constants"
 
 export function* fetchUser(amount) {
   try {

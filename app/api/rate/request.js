@@ -8,6 +8,19 @@ const request = {
       default:
         break
     }
+  },
+
+  post (endpoint, interval) {
+    switch (endpoint) {
+      case '/ratehistory':
+        return fetch('/api/ratehistory', {
+          body: JSON.stringify(interval),
+          method: 'POST',
+          credentials: 'same-origin'
+        })
+      default:
+        break
+    }
   }
 }
 
