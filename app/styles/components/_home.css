@@ -24,3 +24,24 @@
   flex-direction: column;
   width: calc(50% - $wrapper-padding);
 }
+
+.chart-wrapper {
+  margin: 32px 24px;
+}
+
+.chart-wrapper text {
+  font-size: 0.7em;
+}
+
+.chart-wrapper .tooltip {
+  font-size: 12px;
+  max-width: 200px;
+  background-color: rgba(0, 0, 0, 0.777);
+  padding: 10px;
+  color: white;
+}
+
+.transfer-form__wrapper {
+  max-width: none !important;
+  margin: 0 32px;
+}

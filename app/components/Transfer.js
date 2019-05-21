@@ -17,7 +17,7 @@ class Transfer extends Component {
 
     return (
       <div className='form-page__wrapper'>
-        <div className='form-page__form-wrapper'>
+        <div className='transfer-form__wrapper form-page__form-wrapper'>
           <div className='form-page__form-header'>
             <h2 className='form-page__form-heading'>Transfer</h2>
           </div>
