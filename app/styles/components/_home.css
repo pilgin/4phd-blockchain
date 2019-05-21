@@ -46,8 +46,14 @@
   margin: 0 32px;
 }
 
+.description {
+  max-width: 100%;
+}
+
 .description pre {
   font-size: 12px;
   background-color: #271e1e;
   color: #a4fda4;
+  white-space: normal;
+  word-break: break-all;
 }
