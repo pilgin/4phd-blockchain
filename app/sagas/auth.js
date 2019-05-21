@@ -19,7 +19,7 @@ import {
  * @param  {string} password               The password of the user
  * @param  {object} options                Options
  */
-export function* authorize({ login, password, registering }) {
+export function* authorize({ login, password, wallet, registering }) {
   yield put({ type: SENDING_REQUEST, sending: true })
 
   try {
@@ -31,14 +31,14 @@ export function* authorize({ login, password, registering }) {
     // with `yield`!
 
     if (registering) {
-      response = yield call(authApi.register, login, password)
+      response = yield call(authApi.register, login, password, wallet)
     } else {
       response = yield call(authApi.login, login, password)
     }
 
     return response
   } catch (error) {
-    yield put({ type: REQUEST_ERROR, error: error.message })
+    yield put({ type: REQUEST_ERROR, error: error.message || 'Unknown error' })
 
     return false
   } finally {
@@ -106,7 +106,7 @@ export function* logoutFlow() {
     yield put({ type: SET_AUTH, newAuthState: false })
 
     yield call(logout)
-    forwardTo('/')
+    forwardTo('/login')
   }
 }
 
@@ -114,17 +114,17 @@ export function* registerFlow() {
   while (true) {
     // We always listen to `REGISTER_REQUEST` actions
     const request = yield take(REGISTER_REQUEST)
-    const { login, password } = request.data
+    const { login, password, wallet } = request.data
 
     // We call the `authorize` task with the data, telling it that we are registering a user
     // This returns `true` if the registering was successful, `false` if not
-    const wasSuccessful = yield call(authorize, { login, password, registering: true })
+    const wasSuccessful = yield call(authorize, { login, password, wallet, registering: true })
 
     // If we could register a user, we send the appropiate actions
     if (wasSuccessful) {
       yield put({ type: SET_AUTH, newAuthState: true }) // User is logged in (authorized) after being registered
-      yield put({ type: CHANGE_FORM, newFormState: { login: '', password: '' } }) // Clear form
-      forwardTo('/home') // Go to dashboard page
+      yield put({ type: CHANGE_FORM, newFormState: { login: '', password: '', wallet: '' } }) // Clear form
+      forwardTo('/home') // Go to home page
     }
   }
 }

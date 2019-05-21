@@ -52,8 +52,6 @@ class Main extends Component {
   render () {
     const {loggedIn} = store.getState().auth
 
-    try { console.log(this.props.location.pathname) } catch(e) {}
-
     return (
       <Provider store={store}>
         <Router history={browserHistory}>

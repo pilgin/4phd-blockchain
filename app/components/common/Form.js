@@ -11,9 +11,10 @@ class Form extends Component {
     this._onSubmit = this._onSubmit.bind(this)
     this._changeUsername = this._changeUsername.bind(this)
     this._changePassword = this._changePassword.bind(this)
+    this._changeWallet = this._changeWallet.bind(this)
   }
   render () {
-    const {error} = this.props
+    const { error, registering } = this.props
 
     return (
       <form className='form' onSubmit={this._onSubmit}>
@@ -45,6 +46,24 @@ class Form extends Component {
             Password
           </label>
         </div>
+        {
+          registering ?
+            <div className='form__field-wrapper'>
+              <input
+                className='form__field-input'
+                type='text'
+                id='wallet'
+                value={this.props.data.wallet}
+                placeholder='wallet'
+                onChange={this._changeWallet}
+                autoCorrect='off'
+                autoCapitalize='off'
+                spellCheck='false' />
+              <label className='form__field-label' htmlFor='wallet'>
+                Wallet
+              </label>
+            </div> : null
+        }
         <div className='form__submit-btn-wrapper'>
           {this.props.currentlySending ? (
             <LoadingButton />
@@ -66,13 +85,17 @@ class Form extends Component {
     this._emitChange({...this.props.data, password: event.target.value})
   }
 
+  _changeWallet (event) {
+    this._emitChange({...this.props.data, wallet: event.target.value})
+  }
+
   _emitChange (newFormState) {
     this.props.dispatch(changeForm(newFormState))
   }
 
   _onSubmit (event) {
     event.preventDefault()
-    this.props.onSubmit(this.props.data.login, this.props.data.password)
+    this.props.onSubmit(this.props.data.login, this.props.data.password, this.props.data.wallet)
   }
 }
 

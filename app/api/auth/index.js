@@ -37,9 +37,17 @@ const auth = {
   * @param  {string} login The login of the user
   * @param  {string} password The password of the user
   */
-  register (login, password) {
-    return request.post('/register', { login, password })
-      .then(() => auth.login(login, password))
+  register (login, password, wallet) {
+    return request.post('/register', { login, password, wallet })
+      .then((response) => {
+        if (!response.ok) return Promise.reject('Registration failed')
+
+        return response.json()
+          .then((json) => {
+            return response.ok ? Promise.resolve({ data: json }) : Promise.reject(json.message)
+          })
+          .then(() => auth.login(login, password))
+      })
   },
 
   loggedIn () {

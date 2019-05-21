@@ -15,6 +15,7 @@ class Register extends Component {
   render () {
     const { dispatch } = this.props
     const { formState, currentlySending, error } = this.props.data.auth
+    const registering = true
 
     return (
       <div className='form-page__wrapper'>
@@ -23,14 +24,15 @@ class Register extends Component {
             <h2 className='form-page__form-heading'>Register</h2>
           </div>
           <Form data={formState} dispatch={dispatch} history={this.props.history}
-          onSubmit={this._register} btnText={'Register'} error={error} currentlySending={currentlySending} />
+            onSubmit={this._register} btnText={'Register'} registering={registering}
+            error={error} currentlySending={currentlySending} />
         </div>
       </div>
     )
   }
 
-  _register (login, password) {
-    this.props.dispatch(registerRequest({ login, password }))
+  _register (login, password, wallet) {
+    this.props.dispatch(registerRequest({ login, password, wallet }))
   }
 }
 
