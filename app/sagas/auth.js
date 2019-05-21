@@ -38,7 +38,7 @@ export function* authorize({ login, password, wallet, registering }) {
 
     return response
   } catch (error) {
-    yield put({ type: REQUEST_ERROR, error: error.message || 'Unknown error' })
+    yield put({ type: REQUEST_ERROR, error: error.message })
 
     return false
   } finally {

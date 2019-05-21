@@ -13,22 +13,28 @@ const auth = {
 
     return request.post('/login', {login, password})
       .then((response) => {
-        if (!response.ok) return Promise.reject('Login failed')
+        if (!response.ok) return response.json().then((error) => Promise.reject(error))
 
         localStorage.user = login
 
         return Promise.resolve(true)
+      })
+      .catch((error) => {
+        return Promise.reject(error)
       })
   },
 
   logout () {
     return request.post('/logout')
       .then((response) => {
-        if (!response.ok) return Promise.reject('Logout failed')
+        if (!response.ok) return response.json().then((error) => Promise.reject(error))
 
         delete localStorage.user
 
         return Promise.resolve(true)
+      })
+      .catch((error) => {
+        return Promise.reject(error)
       })
   },
 
@@ -40,14 +46,15 @@ const auth = {
   register (login, password, wallet) {
     return request.post('/register', { login, password, wallet })
       .then((response) => {
-        if (!response.ok) return Promise.reject('Registration failed')
+        if (!response.ok) return response.json().then((error) => Promise.reject(error))
 
         return response.json()
-          .then((json) => {
-            return response.ok ? Promise.resolve({ data: json }) : Promise.reject(json.message)
-          })
-          .then(() => auth.login(login, password))
       })
+      .then((data) => {
+        return Promise.resolve({ data })
+      })
+      .then(() => auth.login(login, password))
+      .catch((error) => Promise.reject(error))
   },
 
   loggedIn () {
