@@ -25,7 +25,7 @@ class User extends Component {
   render() {
     return (
       <article>
-        <section className='text-section'>
+        <section>
           <h1>User</h1>
           <table>
             <tbody>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import User from './User'
 import Transfer from './Transfer'
+import RateChart from './RateChart';
 
 class Home extends Component {
   constructor(props) {
@@ -16,6 +17,9 @@ class Home extends Component {
           <User />
         </section>
         <section className='column'>
+          <div>
+            <RateChart />
+          </div>
           <div className='margin-vert'>
             <Transfer />
           </div>

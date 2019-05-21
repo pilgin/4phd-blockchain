@@ -35,6 +35,9 @@ function makeWebpackConfig (options) {
         'process.env': {
           NODE_ENV: JSON.stringify('production')
         }
+      }),
+      new webpack.ProvidePlugin({
+        ReactD3: "react-d3-components"
       })
     ]
   } else {
@@ -50,6 +53,9 @@ function makeWebpackConfig (options) {
       new webpack.HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
         template: 'index.html'
+      }),
+      new webpack.ProvidePlugin({
+        ReactD3: "react-d3-components"
       })
     ]
   }
