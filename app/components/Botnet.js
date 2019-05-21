@@ -21,7 +21,9 @@ class Botnet extends Component {
       const { lastseen, total_blocks: totalBlocks } = botnet[name]
 
       return <tr key={name}>
-        <td><span>{name}</span></td><td><span>{lastseen}</span></td><td><span>{totalBlocks}</span></td>
+        <td><span>{name}</span></td><td><span>{
+          lastseen ? moment.unix(lastseen).utc().format('MMM DD HH:mm:ss') : undefined
+        }</span></td><td><span>{totalBlocks}</span></td>
       </tr>
     })
   }
