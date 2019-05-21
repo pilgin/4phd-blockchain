@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import User from './User'
 import Transfer from './Transfer'
 import RateChart from './RateChart'
+import Description from './Description'
 
 class Home extends Component {
   constructor(props) {
@@ -14,7 +15,12 @@ class Home extends Component {
     return (
       <article className='page-container'>
         <section className='column'>
-          <User />
+          <div>
+            <User />
+          </div>
+          <div className='margin-vert'>
+            <Description />
+          </div>
         </section>
         <section className='column'>
           <div>

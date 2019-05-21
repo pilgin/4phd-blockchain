@@ -14,9 +14,6 @@ class Nav extends Component {
   render () {
     const navButtons = this.props.loggedIn ? (
       <div>
-        <a href='/static/miner.go' download='miner.go'
-           style={{paddingRight: '16px'}}>Download Miner</a>
-        <a href='/static/readme.txt' target='_blank' style={{paddingRight: '16px'}}>Readme</a>
         <Link to='/home' className='btn btn--dash btn--nav'>Home</Link>
         <Link to='/dashboard' className='btn btn--dash btn--nav'>Dashboard</Link>
         <Link to='/botnet' className='btn btn--dash btn--nav'>My botnet</Link>

@@ -45,3 +45,9 @@
   max-width: none !important;
   margin: 0 32px;
 }
+
+.description pre {
+  font-size: 12px;
+  background-color: #271e1e;
+  color: #a4fda4;
+}
