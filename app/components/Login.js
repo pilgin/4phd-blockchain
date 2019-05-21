@@ -1,5 +1,6 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import {Link} from 'react-router'
 import Form from './common/Form'
 
 import {loginRequest} from '../actions/auth'
@@ -12,8 +13,8 @@ class Login extends Component {
   }
 
   render () {
-    const {dispatch} = this.props
-    const {formState, currentlySending, error} = this.props.data.auth
+    const { dispatch } = this.props
+    const { formState, currentlySending, error } = this.props.data.auth
 
     return (
       <div className='form-page__wrapper'>
@@ -29,7 +30,7 @@ class Login extends Component {
   }
 
   _login (login, password) {
-    this.props.dispatch(loginRequest({login, password}))
+    this.props.dispatch(loginRequest({ login, password }))
   }
 }
 

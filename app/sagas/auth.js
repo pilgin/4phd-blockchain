@@ -6,6 +6,7 @@ import authApi from '../api/auth'
 import {
   SENDING_REQUEST,
   LOGIN_REQUEST,
+  REGISTER_REQUEST,
   SET_AUTH,
   LOGOUT,
   CHANGE_FORM,
@@ -18,7 +19,7 @@ import {
  * @param  {string} password               The password of the user
  * @param  {object} options                Options
  */
-export function* authorize({ login, password }) {
+export function* authorize({ login, password, registering }) {
   yield put({ type: SENDING_REQUEST, sending: true })
 
   try {
@@ -28,7 +29,12 @@ export function* authorize({ login, password }) {
     // module, which is asynchronous. Because we're using generators, we can work
     // as if it's synchronous because we pause execution until the call is done
     // with `yield`!
-    response = yield call(authApi.login, login, password)
+
+    if (registering) {
+      response = yield call(authApi.register, login, password)
+    } else {
+      response = yield call(authApi.login, login, password)
+    }
 
     return response
   } catch (error) {
@@ -74,7 +80,7 @@ export function* loginFlow() {
     // lead to a race condition. This is unlikely, but just in case, we call `race` which
     // returns the "winner", i.e. the one that finished first
     const winner = yield race({
-      auth: call(authorize, { login, password }),
+      auth: call(authorize, { login, password, registering: false }),
       logout: take(LOGOUT)
     })
 
@@ -84,7 +90,7 @@ export function* loginFlow() {
       yield put({ type: SET_AUTH, newAuthState: true }) // User is logged in (authorized)
       yield put({ type: CHANGE_FORM, newFormState: { login: '', password: '' } }) // Clear form
 
-      forwardTo('/stats') // Go to stats page
+      forwardTo('/home') // Go to stats page
     }
   }
 }
@@ -101,6 +107,25 @@ export function* logoutFlow() {
 
     yield call(logout)
     forwardTo('/')
+  }
+}
+
+export function* registerFlow() {
+  while (true) {
+    // We always listen to `REGISTER_REQUEST` actions
+    const request = yield take(REGISTER_REQUEST)
+    const { login, password } = request.data
+
+    // We call the `authorize` task with the data, telling it that we are registering a user
+    // This returns `true` if the registering was successful, `false` if not
+    const wasSuccessful = yield call(authorize, { login, password, registering: true })
+
+    // If we could register a user, we send the appropiate actions
+    if (wasSuccessful) {
+      yield put({ type: SET_AUTH, newAuthState: true }) // User is logged in (authorized) after being registered
+      yield put({ type: CHANGE_FORM, newFormState: { login: '', password: '' } }) // Clear form
+      forwardTo('/home') // Go to dashboard page
+    }
   }
 }
 

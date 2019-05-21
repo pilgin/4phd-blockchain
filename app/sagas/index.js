@@ -1,6 +1,6 @@
 import { fork } from 'redux-saga/effects'
 
-import { loginFlow, logoutFlow } from './auth';
+import { loginFlow, logoutFlow, registerFlow } from './auth';
 import { fetchStatsFlow } from './stats'
 import { fetchRateFlow } from './rate'
 import { transferFlow } from './transfer'
@@ -10,6 +10,7 @@ import { fetchBotnetFlow } from './botnet'
 export default function* root() {
   yield fork(loginFlow)
   yield fork(logoutFlow)
+  yield fork(registerFlow)
   yield fork(fetchStatsFlow)
   yield fork(fetchRateFlow)
   yield fork(transferFlow)

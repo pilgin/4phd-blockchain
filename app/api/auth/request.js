@@ -11,6 +11,12 @@ const request = {
         return fetch('/api/logout', {
           credentials: 'same-origin'
         })
+      case '/register':
+        return fetch('/api/registration', {
+          body: JSON.stringify(data),
+          method: 'POST',
+          credentials: 'same-origin'
+        })
       default:
         break
     }
