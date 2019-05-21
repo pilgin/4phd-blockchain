@@ -1,5 +1,5 @@
 import { browserHistory } from 'react-router'
-import { take, call, put, race } from 'redux-saga/effects'
+import { all, take, call, put, race } from 'redux-saga/effects'
 
 import authApi from '../api/auth'
 
@@ -10,7 +10,8 @@ import {
   SET_AUTH,
   LOGOUT,
   CHANGE_FORM,
-  REQUEST_ERROR
+  REQUEST_ERROR,
+  CLEAR_ERROR
 } from '../actions/auth/constants'
 
 /**
@@ -20,7 +21,10 @@ import {
  * @param  {object} options                Options
  */
 export function* authorize({ login, password, wallet, registering }) {
-  yield put({ type: SENDING_REQUEST, sending: true })
+  yield all([
+    put({ type: SENDING_REQUEST, sending: true }),
+    put({ type: CLEAR_ERROR })
+  ])
 
   try {
     let response
@@ -50,7 +54,10 @@ export function* authorize({ login, password, wallet, registering }) {
  * Effect to handle logging out
  */
 export function* logout() {
-  yield put({ type: SENDING_REQUEST, sending: true })
+  yield all([
+    put({ type: SENDING_REQUEST, sending: true }),
+    put({ type: CLEAR_ERROR })
+  ])
 
   // Similar to above, we try to log out by calling the `logout` function in the
   // `auth` module. If we get an error, we send an appropiate action. If we don't,
@@ -130,6 +137,6 @@ export function* registerFlow() {
 }
 
 // Little helper function to abstract going to different pages
-function forwardTo (location) {
+function forwardTo(location) {
   browserHistory.push(location)
 }

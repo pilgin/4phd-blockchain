@@ -2,7 +2,8 @@ import {
   CHANGE_FORM,
   TRANSFER,
   TRANSFER_STATUS,
-  TRANSFER_ERROR
+  TRANSFER_ERROR,
+  CLEAR_ERROR
 } from './constants'
 
 export function changeForm(newFormState) {
@@ -19,4 +20,8 @@ export function transferStatus(status) {
 
 export function transferError(error) {
   return { type: TRANSFER_ERROR, error }
+}
+
+export function clearError () {
+  return { type: CLEAR_ERROR }
 }

@@ -1,7 +1,8 @@
 import {
   CHANGE_FORM,
   TRANSFER_STATUS,
-  TRANSFER_ERROR
+  TRANSFER_ERROR,
+  CLEAR_ERROR
 } from '../actions/transfer/constants'
 
 import transferApi from '../api/transfer'
@@ -22,6 +23,8 @@ export default function transfer(state = transferState, action) {
       return {...state, status: action.status}
     case TRANSFER_ERROR:
       return {...state, error: action.error}
+    case CLEAR_ERROR:
+      return {...state, error: ''}
     default:
       return state
   }

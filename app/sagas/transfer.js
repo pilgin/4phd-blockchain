@@ -1,15 +1,18 @@
-import {take, call, put} from 'redux-saga/effects'
+import { take, call, put } from 'redux-saga/effects'
 
 import transferApi from '../api/transfer'
 
 import {
   TRANSFER,
   TRANSFER_STATUS,
-  TRANSFER_ERROR
+  TRANSFER_ERROR,
+  CLEAR_ERROR
 } from "../actions/transfer/constants"
 
 export function* transfer(amount) {
   try {
+    yield put({ type: CLEAR_ERROR })
+
     const response = yield call(transferApi.transfer, amount)
 
     yield put({ type: TRANSFER_STATUS, data: response.status })
