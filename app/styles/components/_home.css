@@ -25,6 +25,10 @@
   width: calc(50% - $wrapper-padding);
 }
 
+.page-container .column:last-of-type {
+  margin-left: calc($wrapper-padding * 4);
+}
+
 .chart-wrapper {
   margin: 46px 24px -8px;
 }
