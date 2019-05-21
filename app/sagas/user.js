@@ -5,11 +5,14 @@ import userApi from '../api/user'
 import {
   FETCH_USER,
   UPDATE_USER,
-  FETCH_USER_ERROR
+  FETCH_USER_ERROR,
+  CLEAR_USER_ERROR
 } from "../actions/user/constants"
 
 export function* fetchUser(amount) {
   try {
+    yield put({ type: CLEAR_USER_ERROR })
+
     const response = yield call(userApi.fetchUser)
 
     yield put({ type: UPDATE_USER, data: response.data })

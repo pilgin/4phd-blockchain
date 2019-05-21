@@ -16,7 +16,7 @@ class User extends Component {
     const { user = {} } = this.props.data
 
     return Object.entries(user).map(([key, val]) => {
-      return <tr key={key}>
+      return val != undefined && <tr key={key}>
         <td><span>{key}</span></td><td><span>{val}</span></td>
       </tr>
     })
